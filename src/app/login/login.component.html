@@ -1,0 +1,41 @@
+<div class="login-container">
+  <div class="card animate login-card">
+    <div class="login-brand">
+      <a routerLink="/about" class="brand-link">
+        <app-nav-logo></app-nav-logo>
+      </a>
+    </div>
+    <p>Accede a tu perfil</p>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="Introduce tu email" required>
+        
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-danger">
+          <small>Email obligatorio o formato no válido.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" inputmode="numeric" formControlName="password" placeholder="Introduce tu contraseña" required>
+        
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger">
+          <small>Mínimo 8 caracteres, una mayúscula y un número.</small>
+        </div>
+      </div>
+      
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-full" [disabled]="loading || loginForm.invalid">
+        {{ loading ? 'Iniciando...' : 'Entrar' }}
+      </button>
+   
+    </form>
+  </div>
+</div>
+

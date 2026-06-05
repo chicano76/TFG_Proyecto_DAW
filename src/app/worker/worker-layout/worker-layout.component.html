@@ -1,0 +1,27 @@
+<div class="app-container">
+  <!-- Header visible solo en mobile -->
+  <header class="mobile-header">
+    <!-- Boton para abrir/cerrar el drawer -->
+    <button class="btn btn-outline menu-toggle" (click)="toggleMenu()" aria-label="Abrir menu de navegacion">
+      <img class="menu-toggle-icon" src="/sidebarIcons/side_navigation.svg" alt="Menu" />
+    </button>
+
+    <!-- Logo pequeño en header mobile -->
+    <a class="mobile-brand" routerLink="/about" (click)="closeMenu()">
+      <img class="mobile-brand-icon" src="/logo/Timeroute_gear.gif" alt="Time Route" />
+      <span class="mobile-brand-text">Time Route</span>
+    </a>
+  </header>
+
+  <!-- Barra de navegacion lateral -->
+  <app-worker-side-nav
+    [isMobileOpen]="showMobileMenu()"
+    (menuClosed)="closeMenu()"
+    (logoutClicked)="logout()"
+  ></app-worker-side-nav>
+
+  <!-- Area de contenido donde se renderizan las vistas -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

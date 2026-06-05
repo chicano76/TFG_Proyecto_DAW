@@ -1,0 +1,41 @@
+<div class="planificacion">
+    <h1>Planificación de Jornadas</h1>
+    <p>Asigna una ruta a un trabajador para un dia determinado.</p>
+
+    <div class="crear-jornada">
+        <form [formGroup]="journeyForm" (ngSubmit)="planify()">
+            
+            <div class="form-group">
+                <label for="worker">Seleccionar Trabajador</label>
+                <select id="worker" formControlName="id_usuario">
+                    <option [value]="''" disabled>Selecciona un trabajador...</option>
+                    <option *ngFor="let worker of workers" [value]="worker.id">
+                        {{ worker.nombre }}
+                    </option>
+                </select>
+                <small *ngIf="workers.length === 0" class="text-muted">No hay trabajadores disponibles.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="route">Seleccionar Ruta</label>
+                <select id="route" formControlName="id_ruta">
+                    <option value="" disabled selected>Selecciona una ruta...</option>
+                    <option *ngFor="let route of routes" [value]="route.id">
+                        {{ route.nombre }}
+                    </option>
+                </select>
+                <small *ngIf="routes.length === 0" class="text-muted">No hay rutas creadas.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Fecha de la Jornada</label>
+                <input type="date" id="date" formControlName="fecha" [min]="today">
+            </div>
+
+            <button type="submit" class="btn-primario" [disabled]="journeyForm.invalid || loading">
+                <span *ngIf="!loading">Asignar Jornada</span>
+                <span *ngIf="loading">Procesando...</span>
+            </button>
+        </form>
+    </div>
+</div>

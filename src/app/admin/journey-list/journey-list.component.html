@@ -1,0 +1,72 @@
+<div class="jornadas">
+    <div class="cabecera">
+        <div>
+            <h1>Jornadas Planificadas</h1>
+            <p>Listado de todas las rutas asignadas a trabajadores.</p>
+        </div>
+        <button class="btn-primario" (click)="openModal()">Nueva Jornada</button>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">Cargando jornadas...</div>
+
+    <div *ngIf="!loading && journeys.length === 0" class="SinJornadas">
+        <p>No hay jornadas planificadas todavía.</p>
+    </div>
+
+    <div *ngFor="let j of journeys" class="ListaJornadas">
+        <div class="CabeceraJornada">
+            <div class="meta">
+                <div class="Estado" [attr.data-estado]="j.estado">{{ j.estado }}</div>
+                <div>
+                    <h3 class="trabajador">{{ j.trabajador }}</h3>
+                    <small class="email">{{ j.email_trabajador }}</small>
+                    <p class="info-ruta">
+                        <strong>Ruta:</strong> {{ j.ruta }} | <strong>Fecha:</strong> {{ j.fecha }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="AccionesJornada">
+            <button class="Eliminar" (click)="delete(j)">Eliminar Jornada</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-box card" (click)="$event.stopPropagation()">
+        <h3>Asignar Nueva Jornada</h3>
+        
+        <form [formGroup]="journeyForm" (ngSubmit)="save()">
+            <div class="form-group">
+                <label>Seleccionar Trabajador</label>
+                <select formControlName="id_usuario">
+                    <option value="" disabled>Elija un trabajador...</option>
+                    <option *ngFor="let w of workers" [value]="w.id">
+                        {{ w.nombre }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Seleccionar Ruta</label>
+                <select formControlName="id_ruta">
+                    <option value="" disabled>Elija una ruta...</option>
+                    <option *ngFor="let r of routes" [value]="r.id">
+                        {{ r.nombre }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Fecha</label>
+                <input type="date" formControlName="fecha">
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancelar" (click)="closeModal()">Cancelar</button>
+                <button type="submit" class="btn-guardar" [disabled]="journeyForm.invalid">Asignar</button>
+            </div>
+        </form>
+    </div>
+</div>

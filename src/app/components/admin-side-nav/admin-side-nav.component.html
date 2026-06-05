@@ -1,0 +1,26 @@
+<div class="sidebar-overlay" [class.show]="isMobileOpen" (click)="closeMenu()"></div>
+
+<aside class="sidebar" [class.mobile-open]="isMobileOpen">
+  <div class="brand">
+    <a routerLink="/about" class="brand-link" (click)="closeMenu()">
+      <app-nav-logo></app-nav-logo>
+    </a>
+    <p>Panel Admin</p>
+  </div>
+
+  <nav>
+    <a
+      *ngFor="let item of navItems"
+      [routerLink]="item.path"
+      routerLinkActive="active"
+      class="nav-item"
+      (click)="closeMenu()"
+    >
+      {{ item.label }}
+    </a>
+  </nav>
+
+  <div class="footer">
+    <button (click)="logout()" class="btn btn-outline btn-logout">Cerrar sesion</button>
+  </div>
+</aside>

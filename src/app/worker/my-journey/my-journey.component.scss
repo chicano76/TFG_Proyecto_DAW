@@ -1,0 +1,133 @@
+    /* Titulos principales de la vista. */
+    h1, h2, h3 {
+      color: var(--primary);
+      -webkit-text-fill-color: var(--primary);
+    }
+
+    /* Encabezado superior (Mi Jornada + subtitulo) sobre tarjeta solida. */
+    .title-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow);
+
+      h1 {
+        margin-bottom: 0.35rem;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    /* Badge de estado de jornada (CREADA/EN_CURSO/FINALIZADA). */
+    .status-badge { 
+      display: inline-block; 
+      padding: 0.5rem 1rem; 
+      border-radius: 1rem; 
+      font-size: 0.85rem; 
+      font-weight: bold; 
+      color: white;
+    }
+    
+    .visitas-list {
+      margin-top: 1rem;
+    }
+
+    /* Tarjeta de cada visita dentro de la ruta. */
+    .visita-card {
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--border);
+
+      &.completed {
+    background-color: #f0fff4; 
+      }
+      
+      .visita-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .visita-info {
+        flex: 1;
+        
+        .title-group {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .address {
+          margin: 0.5rem 0;
+          color: var(--text-muted);
+          font-size: 0.9rem;
+        }
+
+        .times {
+          font-size: 0.8rem;
+          display: flex;
+          gap: 1rem;
+          color: var(--primary);
+        }
+      }
+    }
+
+    /* Numero de orden de cada parada. */
+    .order-badge {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    /* Layout de cabecera con titulo y estado alineados. */
+    .header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    /* Utilidades locales de tipografia y espaciado de la vista. */
+    .text-muted { color: var(--text-muted); }
+    .text-primary { color: var(--primary); }
+    .text-center { text-align: center; }
+    .text-large { font-size: 1.1rem; }
+    .text-xl { font-size: 3rem; }
+    .text-small { font-size: 0.9rem; }
+    .text-xs { font-size: 0.8rem; }
+
+    .m-0 { margin: 0; }
+    .mt-1 { margin-top: 1rem; }
+    .mb-1 { margin-bottom: 1rem; }
+    .mb-2 { margin-bottom: 2rem; }
+    .p-lg { padding: 4rem 2rem; }
+    
+    .flex { display: flex; }
+    .flex-wrap { flex-wrap: wrap; }
+    .align-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-1 { gap: 1rem; }
+    .gap-sm { gap: 0.5rem; }
+    .w-full { width: 100%; }
+
+    /* Grupo de botones de acciones de visita. */
+    .btn-action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Variante compacta para botones dentro de tarjetas. */
+    .btn-small {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .danger-border {
+      color: var(--danger);
+      border-color: var(--danger);
+    }

@@ -1,0 +1,184 @@
+:host {
+  display: block;
+  padding: 2rem;
+}
+
+.jornadas {
+  .cabecera {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+      h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: #000;
+      }
+      p {
+        margin: 0.5rem 0 0 0;
+        color: #000;
+      }
+    }
+  }
+
+  .btn-primario {
+    padding: 0.6rem 1.2rem;
+    background: #007bff;
+    color: #fff;
+    border: 1px solid #0069d9;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      background: #0069d9;
+    }
+  }
+
+  .SinJornadas {
+    background: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 4px;
+    color: #000;
+  }
+
+  .ListaJornadas {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    .CabeceraJornada {
+      margin-bottom: 1rem;
+
+      .meta {
+        display: flex;
+        align-items: flex-start; 
+        gap: 1rem;
+
+        .Estado {
+          padding: 0.2rem 0.6rem;
+          background: #e9ecef;
+          color: #000;
+          border-radius: 4px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          border: 1px solid #ced4da;
+        }
+
+        .trabajador {
+          margin: 0;
+          font-size: 1.1rem;
+          color: #000;
+        }
+
+        .email {
+          color: #000;
+          display: block;
+        }
+
+        .info-ruta {
+          margin: 0.5rem 0 0 0;
+          font-size: 0.9rem;
+          color: #333;
+        }
+      }
+    }
+
+    .Eliminar {
+      padding: 0.4rem 0.8rem;
+      background: #fff;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      color: #000;
+      cursor: pointer;
+
+      &:hover {
+        background: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+      }
+    }
+  }
+} 
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; 
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #007bff; 
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      box-sizing: border-box; 
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    .btn-cancelar {
+      background: #f8f9fa;
+      border: 1px solid #ced4da;
+      cursor: pointer;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      
+      &:hover { background: #e2e6ea; }
+    }
+
+    .btn-guardar {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+
+      &:hover { background: #0069d9; }
+      &:disabled { background: #ccc; cursor: not-allowed; }
+    }
+  }
+}

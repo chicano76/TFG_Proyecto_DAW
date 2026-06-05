@@ -1,0 +1,34 @@
+<div class="sidebar-overlay" [class.show]="isMobileOpen" (click)="closeMenu()"></div>
+<!--Fondo semitransparente detrás del drawer-->
+
+<aside class="sidebar" [class.mobile-open]="isMobileOpen">
+  <!-- El drawer navegación lateral desplegable  -->
+
+  <div class="brand">
+    <!-- LOGO Y TITULO -->
+    <a routerLink="/about" class="brand-link" (click)="closeMenu()">
+      <app-nav-logo></app-nav-logo>
+    </a>
+    <p>Panel Trabajador</p>
+  </div>
+
+  <nav>
+    <!-- ENLACES DE NAVEGACION  -->
+    <a
+      *ngFor="let item of navItems"
+      [routerLink]="item.path"
+      routerLinkActive="active"
+      class="nav-item"
+      (click)="closeMenu()"
+    >
+      {{ item.label }}
+    </a>
+  </nav>
+
+  <div class="footer">
+    <button (click)="logout()" class="btn btn-outline btn-logout">Cerrar sesion</button>
+    <!-- (click)="logout()" Emite logoutClicked event que el layout padre escucha
+      El layout ejecuta auth.logout() y router.navigate(['/login']) para cerrar sesión y redirigir al login
+    -->
+  </div>
+</aside>

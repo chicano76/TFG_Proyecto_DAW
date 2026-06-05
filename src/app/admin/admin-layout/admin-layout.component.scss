@@ -1,0 +1,85 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: linear-gradient(rgba(248, 250, 252, 0.5), rgba(248, 250, 252, 0.5)), url('/background/background_app.jpg') no-repeat center center / cover;
+}
+
+.mobile-header {
+  display: none;
+  height: 60px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  align-items: center;
+  padding: 0 1rem;
+  gap: 1rem;
+}
+
+.menu-toggle {
+  padding: 0.45rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  transition: transform 0.18s ease;
+
+  &:hover {
+    transform: scale(1.08);
+    background-color: var(--primary-hover);
+  }
+
+  .menu-toggle-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+.mobile-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.25rem;
+  text-decoration: none;
+
+  .mobile-brand-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .mobile-brand-text {
+    white-space: nowrap;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .content {
+    padding: 1rem;
+    padding-top: 5rem;
+  }
+}

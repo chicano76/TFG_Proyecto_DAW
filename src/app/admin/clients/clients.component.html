@@ -1,0 +1,64 @@
+<div class="clientes">
+    <div class="cabecera">
+        <h1>Gestión de Clientes</h1>
+        <p>Listado de todos los clientes.</p>
+        <button class="nuevo-cliente" (click)="openModal()">Nuevo Cliente</button>
+    </div>
+
+    <div class="tabla-clientes">
+        <div class="tabla-responsive">
+            <table class="tabla-clientes">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th class="derecha">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of clients">
+                        <td>{{ client.nombre }}</td>
+                        <td class="text-muted">{{ client.direccion }}</td>
+                        <td class="derecha">
+                            <button class="Editar" (click)="openModal(client)">Editar</button>
+                            <button class="Eliminar" (click)="delete(client.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="clients.length === 0">
+                        <td colspan="3" class="text-center">No hay clientes registrados.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showModal" class="modal-overlay" (click)="closeModal()">
+    <div class="modal-box card animate" (click)="$event.stopPropagation()">
+        <h3>{{ isEditing ? 'Editar Cliente' : 'Nuevo Cliente' }}</h3>
+        
+        <form [formGroup]="clientForm" (ngSubmit)="save()">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" formControlName="nombre" placeholder="Nombre de la empresa">
+            </div>
+
+            <div class="form-group">
+                <label>Dirección</label>
+                <input type="text" formControlName="direccion" placeholder="Calle, Número, Ciudad">
+            </div>
+
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="text" formControlName="telefono" placeholder="9 dígitos">
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancelar" (click)="closeModal()">Cancelar</button>
+                <button type="submit" class="btn-guardar" [disabled]="clientForm.invalid">
+                    {{ isEditing ? 'Actualizar' : 'Guardar' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

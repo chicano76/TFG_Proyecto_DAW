@@ -1,0 +1,90 @@
+<div class="animate">
+  <div class="header-flex">
+    <div class="title-container">
+      <h1>Mi Jornada</h1>
+      <p class="text-muted">Gestiona tus visitas y tiempos del día hoy.</p>
+    </div>
+    <div *ngIf="tieneJornada" class="status-badge" [style.background]="colorEstado">
+      {{ enPausa ? 'EN PAUSA': journey?.estado }}
+    </div>
+  </div>
+
+ <div *ngIf="!tieneJornada" class="card text-center p-lg">
+    <div class="text-xl mb-1"></div>
+    <h3>No tienes ninguna jornada asignada para hoy</h3>
+    <p class="text-muted">Contacta con tu administrador si crees que es un error.</p>
+  </div>
+
+  <div *ngIf="tieneJornada">
+    <div class="card mb-2">
+      <div class="flex justify-between align-center flex-wrap gap-1">
+        <div>
+          <h2 class="m-0">{{ journey?.nombre_ruta }}</h2>
+          <span class="text-small text-muted">Fecha: {{ journey?.fecha | date:'dd/MM/yyyy' }}</span>
+
+          <div *ngIf="journey?.estado === 'CREADA' && !puedeIniciar" class="alert-info-minimal">
+          <small>Esta jornada estará disponible el día programado.</small>
+          </div>
+        </div>
+
+        <div *ngIf="!lat || !lng" class="alert alert-warning mb-1" style="border-left: 5px solid #ffc107; background: #fff3cd; padding: 10px; border-radius: 4px;">
+          <strong>Ubicación desactivada:</strong> 
+              Por favor, permite el acceso al GPS para poder iniciar la jornada.
+          </div>
+        <div class="flex gap-sm">
+          <button *ngIf="puedeIniciar" class="btn btn-primary" (click)="startJourney()">
+            Iniciar Jornada
+          </button>
+          
+          <button *ngIf="enCurso" class="btn" [class.btn-warning]="!enPausa" [class.btn-primary]="enPausa" (click)="togglePause()">
+            {{ enPausa ? 'Finalizar Descanso' : 'Iniciar Descanso' }}
+          </button>
+
+          <button *ngIf="puedeFinalizar" class="btn btn-outline danger-border" (click)="endJourney()">
+            Finalizar Jornada
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="enCurso || finalizada">
+      <h3 class="mb-1">Ruta de Visitas</h3>
+      <div class="visitas-list">
+        <div *ngFor="let v of journey?.visitas; let i = index" class="card visita-card"
+             [style.border-left-color]="v.salida ? 'var(--success)' : (v.llegada ? 'var(--primary)' : 'var(--border)')">
+          
+          <div class="visita-header">
+            <div class="visita-info">
+              <div class="title-group">
+                <span class="badge order-badge">{{ i + 1 }}</span>
+                <strong class="text-large">{{ v.nombre }}</strong>
+              </div>
+              <p class="address"> {{ v.direccion }}</p>
+              
+              <div *ngIf="v.llegada" class="times">
+                <span>Llegada: {{ v.llegada | date:'HH:mm' }}</span>
+                <span *ngIf="v.salida">Salida: {{ v.salida | date:'HH:mm' }}</span>
+                <span *ngIf="v.minutos_visita" class="text-primary"> ({{ v.minutos_visita }} min)</span>
+              </div>
+            </div>
+
+            <div *ngIf="enCurso" class="btn-action-group">
+              <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodeURI(v.direccion)" 
+                 target="_blank" class="btn btn-outline btn-small">
+                Mapa
+              </a>
+
+              <button *ngIf="!v.llegada" class="btn btn-primary btn-small" [disabled]="enPausa" (click)="registrarLlegada(v.id_cliente)">
+                Llegada
+              </button>
+
+              <button *ngIf="v.llegada && !v.salida" class="btn btn-warning btn-small" [disabled]="enPausa" (click)="registrarSalida(v.id_cliente)">
+                Salida
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

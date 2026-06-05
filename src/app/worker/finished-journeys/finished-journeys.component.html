@@ -1,0 +1,27 @@
+<div class="animate">
+  <div class="title-container mb-2">
+    <h1>Mis Jornadas Finalizadas</h1>
+    <p class="text-muted">Historial de rutas que has completado con éxito.</p>
+  </div>
+
+  <div *ngIf="finishedJourneys.length === 0" class="card text-center mt-2">
+    <p class="text-muted">No tienes rutas finalizadas registradas.</p>
+  </div>
+
+  <div *ngIf="finishedJourneys.length > 0">
+    <div *ngFor="let fj of finishedJourneys; let i = index" class="card stop-card">
+      <div class="flex justify-between align-center">
+        <div>
+        
+          <strong class="text-large">{{ fj.fecha | date:'dd/MM/yyyy' }}</strong> - {{ fj.ruta }}
+       
+          <p class="text-small text-muted m-0" style="margin-top: 0.25rem;">
+            Horario: {{ fj.inicio_real | date:'HH:mm' }} - {{ fj.fin_real | date:'HH:mm' }}
+          </p>
+        </div>
+        
+        <div class="status-badge finalizada">FINALIZADA</div>
+      </div>
+    </div>
+  </div>
+</div>

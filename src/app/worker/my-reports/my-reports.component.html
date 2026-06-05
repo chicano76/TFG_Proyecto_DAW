@@ -1,0 +1,89 @@
+<div class="animate">
+  <div class="title-container mb-2">
+    <h1>Mis Informes</h1>
+    <p class="text-muted">Consulta tus kilómetros recorridos, visitas y más detalles de tus jornadas.</p>
+  </div>
+
+  <div class="card max-w-500 mb-2">
+    <div class="filter-grid">
+      <div class="form-group">
+        <label>Mes</label>
+        <select [(ngModel)]="filters.month" name="month">
+          <option *ngFor="let m of months" [value]="m.value">{{ m.label }}</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Año</label>
+        <select [(ngModel)]="filters.year" name="year">
+          <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+        </select>
+      </div>
+      
+      <button class="btn btn-primary" (click)="search()" [disabled]="loading">
+        {{ loading ? '...' : 'Consultar' }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center p-lg">
+    <p class="text-muted">Procesando datos...</p>
+  </div>
+  <div *ngIf="!reportData && !loading && !firstLoad" class="card error-alert animate">
+  <div class="text-center p-md">
+    <p style="color: #dc3545; font-weight: bold;">No se encontraron informes para este periodo.</p>
+    <small class="text-muted">Por favor, selecciona otro mes o año.</small>
+  </div>
+</div>
+  <div *ngIf="reportData && !loading" class="animate">
+    
+    <div class="summary-grid">
+      <div class="card status-card">
+        <small>Km Totales</small>
+        <h3>{{ reportData.summary.km_total.toFixed(2) }} km</h3>
+      </div>
+
+      <div class="card status-card">
+        <small>Visitas</small>
+        <h3>{{ reportData.summary.num_visitas }}</h3>
+      </div>
+
+      <div class="card status-card">
+        <small>Tiempo de visita</small>
+        <h3>{{ reportData.summary.total_visitas_min }} min</h3>
+      </div>
+  
+      <div class="card status-card">
+        <small>Descansos</small>
+        <h3>{{ reportData.summary.total_descanso_min }} min</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Ruta</th>
+            <th>Km</th>
+            <th>Visita</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let day of reportData.days">
+            <td>{{ day.fecha | date:'dd/MM/yyyy' }}</td>
+            <td class="text-muted">{{ day.ruta }}</td>
+            <td>{{ day.km_dia ? day.km_dia.toFixed(2): '0.00' }} km</td>
+            <td>{{ day.min_visitas_dia }} min</td>
+            <td>
+              <span *ngIf="day.isPartial" class="badge bg-danger">Parcial</span>
+              <span *ngIf="!day.isPartial" class="badge bg-primary">OK</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> 
+</div>
+

@@ -1,0 +1,21 @@
+<div class="app-container">
+  <header class="mobile-header">
+    <button class="btn btn-outline menu-toggle" (click)="toggleMenu()" aria-label="Abrir menu de navegacion">
+      <img class="menu-toggle-icon" src="/sidebarIcons/side_navigation.svg" alt="Menu" />
+    </button>
+    <a class="mobile-brand" routerLink="/about" (click)="closeMenu()">
+      <img class="mobile-brand-icon" src="/logo/Timeroute_gear.gif" alt="Time Route" />
+      <span class="mobile-brand-text">Time Route</span>
+    </a>
+  </header>
+
+  <app-admin-side-nav
+    [isMobileOpen]="showMobileMenu()"
+    (menuClosed)="closeMenu()"
+    (logoutClicked)="logout()"
+  ></app-admin-side-nav>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

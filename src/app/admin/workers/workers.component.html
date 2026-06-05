@@ -1,0 +1,80 @@
+<div class="trabajadores">
+    <div class="cabecera">
+        <div>
+            <h1>Gestión de Trabajadores</h1>
+            <p>Administra los accesos de tus empleados al sistema.</p>
+        </div>
+        <button class="nuevo-trabajador" (click)="openModal()">Nuevo Trabajador</button>
+    </div>
+
+    <div class="card">
+        <div class="tabla-responsive">
+            <table class="tabla-trabajadores">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th class="derecha">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.nombre }}</td>
+                        <td>{{ user.email }}</td>
+                        <td class="derecha">
+                            <button class="Editar" (click)="openModal(user)">Editar</button>
+                            <button class="Eliminar" (click)="delete(user.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="users.length === 0">
+                        <td colspan="3" class="empty-row-cell">
+                            No hay trabajadores para mostrar.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showModal" class="modal-overlay" (click)="showModal = false">
+    <div class="modal-box card animate" (click)="$event.stopPropagation()">
+        
+        <h3>{{ isEditing ? 'Editar' : 'Nuevo' }} Trabajador</h3>
+        
+        <form [formGroup]="userForm" (ngSubmit)="save()">
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" formControlName="nombre" placeholder="Ej: Juan Pérez">
+            </div>
+
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" formControlName="email" placeholder="ejemplo@correo.com">
+                <small *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger">
+                    Por favor, introduce un email válido.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Contraseña 
+                    <small *ngIf="isEditing" style="font-weight: normal; color: #666;">
+                        (dejar en blanco para no cambiar)
+                    </small>
+                </label>
+                <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres">
+                <small *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="text-danger">
+                    La contraseña debe tener al menos 8 caracteres.
+                </small>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cerrar" (click)="showModal = false">Cancelar</button>
+                <button type="submit" class="btn-guardar" [disabled]="userForm.invalid">
+                    {{ isEditing ? 'Actualizar' : 'Registrar' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

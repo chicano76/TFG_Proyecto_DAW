@@ -1,0 +1,68 @@
+<div class="rutas">
+    <div class="cabecera">
+        <h1>Rutas Maestras</h1>
+        <p>Visualiza las rutas creadas, añade nuevas o modifica las existentes.</p>
+        <button class="nueva-ruta" (click)="openModal()">Nueva Ruta</button>
+    </div>
+
+    <div class="card">
+        <p *ngIf="routes.length === 0" class="text-center text-muted">No hay rutas configuradas.</p>
+        
+        <div *ngFor="let route of routes" class="targeta-rutas">
+            <div class="route-info">
+                <div>
+                    <h3>{{ route.nombre }}</h3>
+                    <p>{{ route.paradas?.length || 0 }} paradas registradas</p>
+                </div>
+                <button class="ver-editar" (click)="openModal(route)">Ver / Editar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showModal" class="modal-overlay" (click)="showModal = false">
+    <div class="modal-box card animate" (click)="$event.stopPropagation()">
+        <h3>{{ isEditing ? 'Detalle' : 'Nueva' }} Ruta</h3>
+        
+        <form [formGroup]="routeForm" (ngSubmit)="save()">
+            <div class="form-group">
+                <label>Nombre de la Ruta</label>
+                <input type="text" formControlName="nombre" placeholder="Ej: Ruta Norte Mañana">
+                <small *ngIf="routeForm.get('nombre')?.invalid && routeForm.get('nombre')?.touched" class="text-danger">
+                    El nombre debe tener al menos 5 caracteres.
+                </small>
+            </div>
+        
+
+            <hr>
+
+            <h4>Paradas (Clientes)</h4>
+            <div class="add-stop">
+                <select #clientSelect>
+                    <option value="" disabled selected>Añadir cliente...</option>
+                    <option *ngFor="let c of allClients" [value]="c.id">{{ c.nombre }}</option>
+                </select>
+                <button type="button" class="btn-add" (click)="addStop(clientSelect.value); clientSelect.value = ''">Añadir</button>
+            </div>
+
+            <ul class="lista-paradas">
+                <li *ngFor="let p of paradas; let i = index">
+                    <span class="orden">{{ i + 1 }}</span>
+                    <span class="nombre-parada">{{ p.nombre }}</span>
+                    <button type="button" class="btn-remove" (click)="removeStop(i)">×</button>
+                </li>
+                <li *ngIf="paradas.length === 0" class="text-muted text-center">No hay paradas en esta ruta.</li>
+            </ul>
+
+            <div class="modal-actions">
+                <button type="button" *ngIf="isEditing" class="btn-eliminar" (click)="delete()">Eliminar</button>
+                <div class="derecha">
+                    <button type="button" class="btn-cerrar" (click)="showModal = false">Cerrar</button>
+                    <button type="submit" class="btn-guardar" [disabled]="routeForm.invalid">
+                        {{ isEditing ? 'Actualizar' : 'Crear' }} Ruta
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
