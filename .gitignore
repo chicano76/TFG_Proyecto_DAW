@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Caché de Angular
+.angular/
+
+# Compilación
+dist/
+out-tsc/
+
+# Registros
+*.log
+
+# Configuración local y secretos
+.env
+.env.*
+!.env.example
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
