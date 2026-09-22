@@ -100,3 +100,8 @@ Se necesita Node.js con npm compatible con las dependencias del proyecto, PHP co
 La dirección de la API se configura en `src/environments/environment.ts`. Actualmente apunta a `http://localhost:8000`.
 
 Para iniciar una jornada, la aplicación solicita acceso a la ubicación del dispositivo.
+
+## Documentación
+
+- [Manual de usuario de TimeRoute](docs/manual-usuario-timeroute.pdf): guía de acceso, roles y uso de los módulos de la aplicación.
+- [Documentación de los componentes de administración](docs/componentes-admin.pdf): descripción de los componentes, su lógica, estilos y pruebas documentadas.
