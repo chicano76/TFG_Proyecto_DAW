@@ -2,7 +2,7 @@
 
 <img src="docs/images/timeroute-logo.png" alt="Logotipo de TimeRoute" width="200">
 
-Aplicación web para gestionar clientes, trabajadores, rutas y jornadas laborales, desarrollada como proyecto final de Desarrollo de Aplicaciones Web.
+Aplicación web orientada al ámbito sociosanitario para gestionar rutas, jornadas laborales y visitas de atención domiciliaria a personas dependientes. Desarrollada como proyecto final de Desarrollo de Aplicaciones Web.
 
 **Angular 19 · TypeScript · SCSS · PHP · MySQL**
 
